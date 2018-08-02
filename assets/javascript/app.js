@@ -20,6 +20,9 @@ var all = ["NIKOLA TESLA", "ALEJANDRO GONZÁLEZ IÑÁRRITU", "RYAN REYNOLDS", "L
 var classI = ["NIKOLA TESLA", "ALEJANDRO GONZÁLEZ IÑÁRRITU", "RYAN REYNOLDS", "LUPITA NYONGO"];
 var classA = ["TED BUNDY","THE UNIBOMBER","CASEY ANTHONY","JEFFREY DAHMER"];
 var random = '';
+var correctAnswer = false;
+var correctCount = 0;
+var incorrectCount = 0;
 
 
 function nextQuestion(){
@@ -35,29 +38,32 @@ if(random == ''){
     nextQuestion();
 }
 
-$("#immigrant").click(function(){
-     if(classI.indexOf(random) > -1){
+$("#immigrantBtn").click(function(){
+    if(classI.indexOf(random) > -1){
         $("#answer").empty();
         $("#answer").append("CORRECT!");
-    }
-    else{
-        $("#answer").empty();
-        $("#answer").append("WRONG!!");
-    }
+        correctAnswer = true;
+        ++correctCount;
 
+    }
 });
 
-$("#immigrant").click(function(){
+$("#americanBtn").click(function(){
     
     if(classA.indexOf(random) > -1){
         $("#answer").empty();
         $("#answer").append("CORRECT!");
-    }
-    else{
-        $("#answer").empty();
-        $("#answer").append("WRONG!!");
+        correctAnswer=true;
+        ++correctCount;
     }
 });
 
+$(".btn").click(function(){
+    if(correctAnswer === false){
+        $("#answer").empty();
+        $("#answer").append("WRONG!!!");
+        ++incorrectCount;
+    }
+})
 
 
