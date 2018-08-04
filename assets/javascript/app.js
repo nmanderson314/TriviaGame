@@ -23,14 +23,17 @@ var random = '';
 var correctAnswer = false;
 var correctCount = 0;
 var incorrectCount = 0;
+var answered = false;
 
 
 function nextQuestion(){
     random = all[(Math.floor(Math.random() * 8))];
     console.log(random);
-
     $("#name").empty();
+    $("#answer").empty();
+
     $("#name").append(random);
+
     return random;
 };
 
@@ -39,17 +42,17 @@ if(random == ''){
 }
 
 $("#immigrantBtn").click(function(){
+    answered = true;
     if(classI.indexOf(random) > -1){
         $("#answer").empty();
         $("#answer").append("CORRECT!");
         correctAnswer = true;
         ++correctCount;
-
     }
 });
 
 $("#americanBtn").click(function(){
-    
+    answered = true;
     if(classA.indexOf(random) > -1){
         $("#answer").empty();
         $("#answer").append("CORRECT!");
@@ -64,6 +67,12 @@ $(".btn").click(function(){
         $("#answer").append("WRONG!!!");
         ++incorrectCount;
     }
+
+    setTimeout(function() {
+        nextQuestion();
+        }, 1000);
 })
+
+
 
 
