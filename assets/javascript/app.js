@@ -26,12 +26,27 @@ var incorrectCount = 0;
 var answered = false;
 
 
+function go(){
+    $(".instruction").css('visibility', 'hidden');
+    $("#goBtn").css('visibility', 'hidden');
+    $("#clock").css('visibility', 'visible');
+    setTimeout(function() {
+        end();
+        }, 60000);
+};
+
+function end(){
+    $(".instruction").css('visibility', 'visible');
+    $("#goBtn").css('visibility', 'visible');
+}
+
 function nextQuestion(){
     random = all[(Math.floor(Math.random() * 8))];
     console.log(random);
     $("#name").empty();
     $("#answer").empty();
-
+    answered = false;
+    correctAnswer = false;
     $("#name").append(random);
 
     return random;
@@ -62,17 +77,21 @@ $("#americanBtn").click(function(){
 });
 
 $(".btn").click(function(){
-    if(correctAnswer === false){
-        $("#answer").empty();
-        $("#answer").append("WRONG!!!");
-        ++incorrectCount;
-    }
-
-    setTimeout(function() {
-        nextQuestion();
-        }, 1000);
+    if(answered === true){
+        if(correctAnswer === false){
+            $("#answer").empty();
+            $("#answer").append("WRONG!!!");
+            ++incorrectCount;
+        };
+    
+        setTimeout(function() {
+            nextQuestion();
+            }, 1000);
+    };
 })
 
-
+$("#goBtn").click(function(){
+    go();
+})
 
 
